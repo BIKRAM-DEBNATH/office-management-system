@@ -1,8 +1,10 @@
-// src/context/leaveContext.js
 import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 
 const LeaveContext = createContext();
+
+// ✅ Central API base URL
+const API = "https://oms-api-production.up.railway.app";
 
 export const LeaveProvider = ({ children }) => {
   const [leaves, setLeaves] = useState([]);
@@ -10,7 +12,7 @@ export const LeaveProvider = ({ children }) => {
 
   const fetchLeaves = async (token) => {
     try {
-      const res = await axios.get("/api/leaves", {
+      const res = await axios.get(`${API}/api/leaves`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setLeaves(res.data);
@@ -23,7 +25,7 @@ export const LeaveProvider = ({ children }) => {
 
   const applyLeave = async (form, token) => {
     try {
-      const res = await axios.post("/api/leaves", form, {
+      const res = await axios.post(`${API}/api/leaves`, form, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setLeaves((prev) => [res.data, ...prev]);
@@ -34,7 +36,7 @@ export const LeaveProvider = ({ children }) => {
 
   const updateLeaveStatus = async (id, status, note, token) => {
     try {
-      const res = await axios.put(`/api/leaves/${id}`, { status, note }, {
+      const res = await axios.put(`${API}/api/leaves/${id}`, { status, note }, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setLeaves((prev) =>
@@ -46,7 +48,15 @@ export const LeaveProvider = ({ children }) => {
   };
 
   return (
-    <LeaveContext.Provider value={{ leaves, loading, fetchLeaves, applyLeave, updateLeaveStatus }}>
+    <LeaveContext.Provider
+      value={{
+        leaves,
+        loading,
+        fetchLeaves,
+        applyLeave,
+        updateLeaveStatus,
+      }}
+    >
       {children}
     </LeaveContext.Provider>
   );
