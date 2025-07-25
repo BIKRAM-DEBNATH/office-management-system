@@ -26,7 +26,7 @@ const Login = () => {
     }
 
     try {
-      const response = await axios.post("https://office-management-system-api.vercel.app/api/auth/login", {
+const res = await axios.get("https://oms.bikram.in/api/login", {
         email,
         password,
       });
