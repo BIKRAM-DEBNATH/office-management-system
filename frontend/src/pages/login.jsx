@@ -26,18 +26,18 @@ const Login = () => {
     }
 
     try {
-const res = await axios.get("https://oms-api-production.up.railway.app/api/login", {
+      const res = await axios.post("https://oms-api-production.up.railway.app/api/auth/login", {
         email,
         password,
       });
 
-      login(response.data);
+      login(res.data);
       setSuccess("✅ Login successful!");
-      console.log("Login Response:", response.data);
+      console.log("Login Response:", res.data);
 
-      if (response.data.user.role === "admin") {
+      if (res.data.user.role === "admin") {
         navigate("/admin-dashboard");
-      } else if (response.data.user.role === "employee") {
+      } else if (res.data.user.role === "employee") {
         navigate("/employee-dashboard");
       }
     } catch (err) {
