@@ -19,7 +19,7 @@ const Timeline = () => {
   const markAsComplete = async (taskId) => {
     try {
       const token = localStorage.getItem("token");
-      await axios.put(`https://office-management-system-api.vercel.app/api/tasks/${taskId}/complete`, {}, {
+await axios.put(`https://oms.bikram.in/api/tasks/${taskId}/complete`, {}, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
