@@ -42,7 +42,7 @@ export const login = async (req, res) => {
   }
 };
 
-//  Token verification controller
+
 export const verify = async (req, res) => {
   res.status(200).json({
     success: true,
