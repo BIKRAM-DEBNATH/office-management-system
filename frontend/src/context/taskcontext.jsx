@@ -5,8 +5,8 @@ const TaskContext = createContext();
 
 export const TaskProvider = ({ children }) => {
   const [tasks, setTasks] = useState([]);
-  const [loading, setLoading] = useState(true); 
-  const [error, setError] = useState(null);     
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const fetchTasks = async (isAdmin = false) => {
     try {
@@ -17,8 +17,8 @@ export const TaskProvider = ({ children }) => {
       }
 
       const endpoint = isAdmin
-        ? "http://localhost:5000/api/tasks" // all tasks for admin
-        : "http://localhost:5000/api/tasks/employee"; // only employee's tasks
+        ? "https://office-management-system-api.vercel.app/api/tasks"           // all tasks for admin
+        : "https://office-management-system-api.vercel.app/api/tasks/employee"; // only employee's tasks
 
       const res = await axios.get(endpoint, {
         headers: {
@@ -34,8 +34,6 @@ export const TaskProvider = ({ children }) => {
       setLoading(false);
     }
   };
-
- 
 
   return (
     <TaskContext.Provider value={{ tasks, setTasks, fetchTasks, loading, error }}>

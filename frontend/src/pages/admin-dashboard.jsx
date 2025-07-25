@@ -17,7 +17,7 @@ const Admindashboard = () => {
   const fetchEmployeeCount = async () => {
     try {
       const token = localStorage.getItem('token');
-      const res = await axios.get('http://localhost:5000/api/employees/count', {
+      const res = await axios.get('https://office-management-system-api.vercel.app/api/employees/count', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
