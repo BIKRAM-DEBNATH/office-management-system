@@ -15,8 +15,8 @@ const PORT = process.env.PORT || 5000;
 
 // ✅ CORS Setup: allow both local and Vercel frontend
 const allowedOrigins = [
-  "http://localhost:5173",
-  "https://office-management-system-rho.vercel.app"
+  'http://localhost:5173',
+  'https://office-management-system-ok962mkma.vercel.app' // ✅ Replace with actual deployed frontend
 ];
 
 app.use(cors({
@@ -24,7 +24,7 @@ app.use(cors({
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
-      callback(new Error("Not allowed by CORS"));
+      callback(new Error('Not allowed by CORS'));
     }
   },
   credentials: true,
@@ -35,7 +35,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // ✅ Routes
-app.use('/api/', authRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/employees', employeeRoutes);
 app.use('/api/tasks', taskRoutes);
