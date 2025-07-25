@@ -13,11 +13,11 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// ✅ Allow listed domains
+// ✅ Allow your frontend domains
 const allowedOrigins = [
-  'http://localhost:5173',
-  'https://office-management-system-ok962mkma.vercel.app',
-  'https://office-management-system-rho.vercel.app'
+  "http://localhost:5173",
+  "https://office-management-system-ok962mkma.vercel.app",
+  "https://office-management-system.vercel.app"
 ];
 
 app.use(cors({
@@ -25,50 +25,41 @@ app.use(cors({
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
-      callback(new Error('Not allowed by CORS'));
+      callback(new Error("Not allowed by CORS"));
     }
   },
-  credentials: true,
+  credentials: true
 }));
 
-// ✅ Middleware
+// ✅ Middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// ✅ API Routes
-app.use('/api/auth', authRouter);
-app.use('/api/employees', employeeRoutes);
-app.use('/api/tasks', taskRoutes);
-app.use('/api/leaves', leaveRoutes);
+// ✅ Routes
+app.use("/api/auth", authRouter);
+app.use("/api/employees", employeeRoutes);
+app.use("/api/tasks", taskRoutes);
+app.use("/api/leaves", leaveRoutes);
 
-// ✅ Health Check
-app.get('/api/health', (req, res) => {
-  res.json({ status: 'OK', timestamp: new Date().toISOString() });
+// ✅ Health check
+app.get("/api/health", (req, res) => {
+  res.json({ status: "OK", time: new Date().toISOString() });
 });
 
-// ✅ Error Handling
-app.use((err, req, res, next) => {
-  console.error('❌ Error:', err.message);
-  res.status(500).json({ error: err.message });
+// ✅ 404 fallback
+app.use("*", (req, res) => {
+  res.status(404).json({ error: "Route not found" });
 });
 
-// ✅ 404 Handler
-app.use('*', (req, res) => {
-  res.status(404).json({ error: 'Route not found' });
-});
-
-// ✅ Start Server
+// ✅ Start server
 const startServer = async () => {
   try {
     await connectdb();
     await Admindb();
     await createDefaultAdmin();
-
-    app.listen(PORT, () => {
-      console.log(`✅ Server running on http://localhost:${PORT}`);
-    });
+    app.listen(PORT, () => console.log(`✅ Server running at http://localhost:${PORT}`));
   } catch (err) {
-    console.error('❌ Failed to start server:', err.message);
+    console.error("❌ Server start error:", err.message);
   }
 };
 
