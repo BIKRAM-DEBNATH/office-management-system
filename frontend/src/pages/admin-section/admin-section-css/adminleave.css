@@ -1,0 +1,127 @@
+/* Reset & Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  font-family: "Segoe UI", sans-serif;
+  background-color: #121212;
+  color: #eee;
+  overflow: hidden;
+}
+
+/* Layout Container */
+.admin-requests-page {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+/* Fixed Sidebar */
+.admin-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 220px;
+  background-color: #1e1e2f;
+  padding: 1.5rem;
+  color: #fff;
+  z-index: 1000;
+  overflow-y: auto;
+}
+
+/* Main Content */
+.admin-main-content {
+  margin-left: 220px; /* Equal to sidebar width */
+  flex: 1;
+  padding: 2rem;
+  height: 100vh;
+  overflow-y: auto;
+  background-color: #121212;
+}
+
+/* Title */
+.admin-main-content h2 {
+  color: #bb86fc;
+  margin-bottom: 2rem;
+}
+
+/* Request List */
+.request-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Request Card */
+.request-card {
+  background-color: #1e1e1e;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(187, 134, 252, 0.2);
+  border-left: 5px solid #bb86fc;
+  transition: 0.3s;
+}
+
+.request-card p {
+  margin: 0.3rem 0;
+}
+
+/* Actions */
+.action-box {
+  margin-top: 1rem;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.action-box button {
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: #bb86fc;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+.action-box button:hover {
+  background-color: #9e67f8;
+}
+
+/* Reject Box */
+.reject-box {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+.reject-box input {
+  padding: 0.4rem;
+  border-radius: 6px;
+  border: none;
+  background-color: #2e2e2e;
+  color: white;
+  box-shadow: 0 0 6px rgba(187, 134, 252, 0.2);
+  flex: 1;
+  min-width: 200px;
+}
+
+/* Rejection Note Box */
+.note-box {
+  margin-top: 1rem;
+  padding: 0.8rem;
+  background-color: #2a2a2a;
+  border-left: 4px solid red;
+  border-radius: 6px;
+  color: #ffcdd2;
+  word-break: break-word;
+}

@@ -1,0 +1,55 @@
+// src/context/leaveContext.js
+import { createContext, useContext, useEffect, useState } from "react";
+import axios from "axios";
+
+const LeaveContext = createContext();
+
+export const LeaveProvider = ({ children }) => {
+  const [leaves, setLeaves] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const fetchLeaves = async (token) => {
+    try {
+      const res = await axios.get("/api/leaves", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setLeaves(res.data);
+    } catch (err) {
+      console.error("Error fetching leaves:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const applyLeave = async (form, token) => {
+    try {
+      const res = await axios.post("/api/leaves", form, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setLeaves((prev) => [res.data, ...prev]);
+    } catch (err) {
+      console.error("Apply leave error:", err);
+    }
+  };
+
+  const updateLeaveStatus = async (id, status, note, token) => {
+    try {
+      const res = await axios.put(`/api/leaves/${id}`, { status, note }, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setLeaves((prev) =>
+        prev.map((l) => (l._id === id ? { ...l, status: res.data.status } : l))
+      );
+    } catch (err) {
+      console.error("Update leave status error:", err);
+    }
+  };
+
+  return (
+    <LeaveContext.Provider value={{ leaves, loading, fetchLeaves, applyLeave, updateLeaveStatus }}>
+      {children}
+    </LeaveContext.Provider>
+  );
+};
+
+export const useLeave = () => useContext(LeaveContext);
