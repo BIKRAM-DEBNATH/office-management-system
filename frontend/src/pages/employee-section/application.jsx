@@ -17,7 +17,7 @@ const ApplicationToAdmin = () => {
   const fetchMyLeaves = async () => {
     try {
       const token = localStorage.getItem("token");
-const res = await axios.get("https://oms.bikram.in/api/leaves", {
+const res = await axios.get("https://oms-api-production.up.railway.app/api/leaves", {
         headers: { Authorization: `Bearer ${token}` },
       });
 
