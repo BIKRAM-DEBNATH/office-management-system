@@ -21,7 +21,7 @@ const AuthProvider = ({ children }) => {
     }
 
     try {
-      const response = await axios.get('https://office-management-system-api.vercel.app/api/auth/verify', {
+  const response = await axios.get('https://office-management-system-api.vercel.app/api/auth/verify', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
