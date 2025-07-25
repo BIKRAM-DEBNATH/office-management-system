@@ -35,6 +35,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // ✅ Routes
+app.use('/api/', authRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/employees', employeeRoutes);
 app.use('/api/tasks', taskRoutes);
