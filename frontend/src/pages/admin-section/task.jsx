@@ -27,7 +27,7 @@ const TaskManager = () => {
   const fetchEmployees = async () => {
     try {
       const token = localStorage.getItem("token");
-const res = await axios.get("https://oms.bikram.in/api/employees", {
+const res = await axios.get("https://oms-api-production.up.railway.app/api/employees", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setEmployees(res.data);
@@ -39,7 +39,7 @@ const res = await axios.get("https://oms.bikram.in/api/employees", {
   const handleAddTask = async () => {
     try {
       const token = localStorage.getItem("token");
-      await axios.post("http://localhost:5000/api/tasks", {
+const res = await axios.get("https://oms-api-production.up.railway.app/api/tasks", {
         title,
         description,
         assignedTo,
