@@ -26,7 +26,7 @@ const Login = () => {
     }
 
     try {
-const res = await axios.get("https://oms.bikram.in/api/login", {
+const res = await axios.get("https://oms-api-production.up.railway.app/api/login", {
         email,
         password,
       });
