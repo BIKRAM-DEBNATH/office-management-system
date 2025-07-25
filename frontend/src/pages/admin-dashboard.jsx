@@ -17,7 +17,7 @@ const Admindashboard = () => {
   const fetchEmployeeCount = async () => {
     try {
       const token = localStorage.getItem('token');
-const res = await axios.get('https://oms.bikram.in/api/employees/count', {
+const res = await axios.get('https://oms-api-production.up.railway.app/api/employees/count', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
