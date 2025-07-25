@@ -28,7 +28,6 @@ const leaveSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// ✅ Prevent OverwriteModelError
 const Leave = mongoose.models.Leave || mongoose.model('Leave', leaveSchema);
 
 export default Leave;
