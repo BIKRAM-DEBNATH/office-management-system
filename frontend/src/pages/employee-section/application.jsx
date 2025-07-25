@@ -17,7 +17,7 @@ const ApplicationToAdmin = () => {
   const fetchMyLeaves = async () => {
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.get("https://office-management-system-api.vercel.app/api/leaves", {
+const res = await axios.get("https://oms.bikram.in/api/leaves", {
         headers: { Authorization: `Bearer ${token}` },
       });
 
