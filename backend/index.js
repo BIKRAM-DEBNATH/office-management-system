@@ -1,59 +1,44 @@
-import express from 'express';
-import cors from 'cors';
-import dotenv from 'dotenv';
-import connectDB from './db/connectDB.js';
-import authRoutes from './routes/authRoutes.js';
-import employeeRoutes from './routes/employee.js';
-import taskRoutes from './routes/taskRoutes.js';
-import leaveRoutes from './routes/leaveRoutes.js';
+import express from "express";
+import mongoose from "mongoose";
+import cors from "cors";
+import dotenv from "dotenv";
+import userRoutes from "./routes/user.js";
+import employeeRoutes from "./routes/employee.js";
+import taskRoutes from "./routes/task.js";
+import leaveRoutes from "./routes/leave.js";
 
 dotenv.config();
+
 const app = express();
-const PORT = process.env.PORT || 5000;
 
-// ✅ Allow your frontend domains
-const allowedOrigins = [
-  'https://office-management-system-ok962mkma.vercel.app',
-  'https://office-management-system.vercel.app',
-  'https://office-managem-git-41ceee-bikramdebnath907yt-gmailcoms-projects.vercel.app',
-];
-
-app.use(
-  cors({
-    origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error('Not allowed by CORS'));
-      }
-    },
-    credentials: true,
-  })
-);
-
-// ✅ Middlewares
+// Middleware
+app.use(cors({
+  origin: "https://office-management-system-rho.vercel.app", // ✅ frontend domain
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
-// ✅ Routes
-app.use('/api/auth', authRoutes);
-app.use('/api/employees', employeeRoutes);
-app.use('/api/tasks', taskRoutes);
-app.use('/api/leaves', leaveRoutes);
-
-// ✅ Default route
-app.get('/', (req, res) => {
-  res.send('Office Management API is running...');
+// MongoDB connection
+mongoose.connect(process.env.MONGO_URL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+}).then(() => {
+  console.log("MongoDB connected successfully");
+}).catch((err) => {
+  console.error("MongoDB connection error:", err);
 });
 
-// ✅ 404 handler
-app.use((req, res) => {
-  res.status(404).json({ error: 'Route not found' });
+// Routes
+app.use("/api/auth", userRoutes);
+app.use("/api/employees", employeeRoutes);
+app.use("/api/tasks", taskRoutes);
+app.use("/api/leaves", leaveRoutes);
+
+// Root route
+app.get("/", (req, res) => {
+  res.send("Office Management System Backend is Running");
 });
 
-// ✅ Start server after DB connects
-connectDB().then(() => {
-  app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-  });
-});
+// Export app for Vercel
+export default app;
