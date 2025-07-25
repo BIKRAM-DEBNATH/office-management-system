@@ -15,10 +15,10 @@ export const TaskProvider = ({ children }) => {
         setLoading(false);
         return;
       }
+const endpoint = isAdmin
+  ? "https://oms.bikram.in/api/tasks"           // all tasks for admin
+  : "https://oms.bikram.in/api/tasks/employee"; // only employee's tasks
 
-      const endpoint = isAdmin
-        ? "https://office-management-system-api.vercel.app/api/tasks"           // all tasks for admin
-        : "https://office-management-system-api.vercel.app/api/tasks/employee"; // only employee's tasks
 
       const res = await axios.get(endpoint, {
         headers: {
