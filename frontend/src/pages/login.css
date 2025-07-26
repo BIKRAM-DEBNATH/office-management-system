@@ -61,7 +61,7 @@
 /* ===== MAIN LOGIN PAGE CONTAINER ===== */
 .login-page {
   width: 100vw;
-  height: 100vh;
+  height: 110vh;
   display: flex;
   flex-direction: column;
   align-items: center;
