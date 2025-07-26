@@ -1,3 +1,20 @@
+/* ===== GLOBAL SCROLLING FIXES ===== */
+html {
+  overflow-x: hidden;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  height: auto;
+}
+
+body {
+  overflow-x: hidden;
+  overflow-y: auto;
+  margin: 0;
+  padding: 0;
+  height: auto;
+  min-height: 100vh;
+}
+
 /* ===== CSS RESET & BASE STYLES ===== */
 * {
   margin: 0;
@@ -48,12 +65,13 @@
 /* ===== MAIN CONTAINER ===== */
 .admin-dashboard {
   display: flex;
-  min-height: 100vh;
+  min-height: 100vh; /* Changed from height: 100vh */
   background: var(--bg-primary);
   font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   color: var(--text-primary);
   position: relative;
   overflow-x: hidden;
+  /* Remove any overflow-y: hidden if present */
 }
 
 .admin-dashboard::before {
@@ -71,26 +89,24 @@
 
 /* ===== SIDEBAR TOGGLE BUTTON ===== */
 .sidebar-toggle {
-  position: absolute; /* fixed from 'abso' typo */
-  top: 10px; /* moved closer to top */
-  left: 10px; /* moved closer to left */
+  position: fixed;
+  top: 25px;
+  left: 25px;
   z-index: 1001;
   background: var(--bg-glass);
-  border: 0.5px solid var(--border-color);
+  border: 1px solid var(--border-color);
   border-radius: var(--border-radius-md);
-  padding: 8px; /* reduced padding */
+  padding: 12px;
   cursor: pointer;
   backdrop-filter: blur(20px);
   transition: all var(--transition-medium);
   box-shadow: var(--shadow-medium);
-  width: 32px; /* smaller width */
-  height: 32px; /* smaller height */
+  width: var(--toggle-size);
+  height: var(--toggle-size);
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
-
 
 .sidebar-toggle:hover {
   background: var(--bg-card);
@@ -146,6 +162,7 @@
   overflow-y: auto;
   overflow-x: hidden;
   transform: translateX(0);
+  /* Ensure sidebar doesn't block main content scrolling */
 }
 
 .sidebar::-webkit-scrollbar {
@@ -296,11 +313,15 @@
   transition: all var(--transition-medium);
   min-height: 100vh;
   position: relative;
+  overflow-x: hidden;
+  overflow-y: auto; /* Ensure vertical scrolling is allowed */
+  height: auto; /* Allow natural height based on content */
 }
 
 .dashboard-content.expanded {
   margin-left: 0;
   padding-left: calc(var(--toggle-size) + 50px);
+  overflow-y: auto; /* Ensure scrolling works when sidebar is hidden */
 }
 
 /* ===== DASHBOARD HEADER ===== */
@@ -362,7 +383,6 @@
   position: relative;
   overflow: hidden;
   cursor: pointer;
-   color: var(--text-secondary);
 }
 
 .card::before {
@@ -404,10 +424,9 @@
 .card p {
   font-size: 36px;
   font-weight: 700;
-  color: #0f172a; 
+  color: var(--text-primary);
   margin: 0;
 }
-
 
 /* ===== SPECIAL TASK CARD ===== */
 .task-1 {
@@ -885,4 +904,19 @@
 }
 .rounded-xl {
   border-radius: var(--border-radius-xl);
+}
+
+/* ===== PREVENT SCROLL BLOCKING ===== */
+.admin-dashboard *:not(.sidebar):not(.sidebar *) {
+  overflow-x: visible;
+}
+
+/* Ensure main content areas can scroll */
+main,
+.dashboard-content,
+.task-page,
+.admin-employee-container {
+  overflow-y: auto !important;
+  height: auto !important;
+  max-height: none !important;
 }
