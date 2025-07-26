@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from "../../context/context";
 import './admin-section-css/report.css';
+import "./admin-section-css/scrolling-fix.css";
+
 
 const Report = () => {
   const navigate = useNavigate();
