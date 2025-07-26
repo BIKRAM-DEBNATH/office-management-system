@@ -46,33 +46,40 @@ const Admindashboard = () => {
   const pendingTasks = tasks?.filter((task) => task.status === "pending") || []
   const completedTasks = tasks?.filter((task) => task.status === "completed") || []
 
+  // Check if route is exactly /admin-dashboard
+  const isDashboard = location.pathname === "/admin-dashboard"
+
   return (
     <div className="admin-dashboard">
-      <button className="sidebar-toggle" onClick={() => setSidebarOpen(!sidebarOpen)}>
-        <div className="tog-c">
-          <div className="tog-l"></div>
-          <div className="tog-l"></div>
-          <div className="tog-l"></div>
-        </div>
-      </button>
+      {isDashboard && (
+        <>
+          <button className="sidebar-toggle" onClick={() => setSidebarOpen(!sidebarOpen)}>
+            <div className="tog-c">
+              <div className="tog-l"></div>
+              <div className="tog-l"></div>
+              <div className="tog-l"></div>
+            </div>
+          </button>
 
-      <aside className={`sidebar ${sidebarOpen ? "" : "hidden"}`}>
-        <h2 className="logo">Admin Panel</h2>
-        <ul className="nav-links">
-          <li onClick={() => navigate("/admin-dashboard")}>Dashboard</li>
-          <li onClick={() => navigate("/admin-dashboard/employees")}>Employees</li>
-          <li onClick={() => navigate("/admin-dashboard/task")}>New Tasks</li>
-          <li onClick={() => navigate("/admin-dashboard/report")}>Reports</li>
-          <li onClick={() => navigate("/admin-dashboard/leave-requests")}>Leave</li>
-          <li onClick={() => navigate("/admin-dashboard/settings")}>Settings</li>
-          <li onClick={logout} className="logout">
-            Logout
-          </li>
-        </ul>
-      </aside>
+          <aside className={`sidebar ${sidebarOpen ? "" : "hidden"}`}>
+            <h2 className="logo">Admin Panel</h2>
+            <ul className="nav-links">
+              <li onClick={() => navigate("/admin-dashboard")}>Dashboard</li>
+              <li onClick={() => navigate("/admin-dashboard/employees")}>Employees</li>
+              <li onClick={() => navigate("/admin-dashboard/task")}>New Tasks</li>
+              <li onClick={() => navigate("/admin-dashboard/report")}>Reports</li>
+              <li onClick={() => navigate("/admin-dashboard/leave-requests")}>Leave</li>
+              <li onClick={() => navigate("/admin-dashboard/settings")}>Settings</li>
+              <li onClick={logout} className="logout">
+                Logout
+              </li>
+            </ul>
+          </aside>
+        </>
+      )}
 
       <main
-        className={`dashboard-content ${sidebarOpen ? "" : "expanded"}`}
+        className={`dashboard-content ${isDashboard && sidebarOpen ? "" : "expanded"}`}
         style={{
           height: "auto",
           maxHeight: "none",
@@ -80,7 +87,7 @@ const Admindashboard = () => {
           minHeight: "auto",
         }}
       >
-        {location.pathname === "/admin-dashboard" && (
+        {isDashboard && (
           <>
             <header className="dashboard-header">
               <h1>Welcome, {user?.name || "Admin"}</h1>
