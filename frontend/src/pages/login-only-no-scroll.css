@@ -1,0 +1,127 @@
+/* ===== LOGIN PAGE ONLY - NO SCROLL SOLUTION ===== */
+/* This only affects the login page, not other pages */
+
+/* Only target the login page specifically */
+.login-page-no-scroll {
+  overflow: hidden !important;
+  overflow-x: hidden !important;
+  overflow-y: hidden !important;
+  height: 100vh !important;
+  max-height: 100vh !important;
+  width: 100vw !important;
+  max-width: 100vw !important;
+}
+
+/* Hide scrollbars only when login page is active */
+body.login-active {
+  overflow: hidden !important;
+  overflow-x: hidden !important;
+  overflow-y: hidden !important;
+  height: 100vh !important;
+  max-height: 100vh !important;
+}
+
+html.login-active {
+  overflow: hidden !important;
+  overflow-x: hidden !important;
+  overflow-y: hidden !important;
+  height: 100vh !important;
+  max-height: 100vh !important;
+}
+
+/* Hide webkit scrollbars only for login page */
+body.login-active::-webkit-scrollbar,
+html.login-active::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* Firefox scrollbar hiding for login only */
+body.login-active,
+html.login-active {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+/* Login page container styles */
+.login-page {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-primary);
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: var(--text-luxury);
+  position: relative;
+  overflow: hidden;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Ensure login content fits in viewport */
+.login-page .form {
+  width: 100%;
+  max-width: min(450px, calc(100vw - 40px));
+  max-height: calc(100vh - 200px);
+  overflow: hidden;
+}
+
+.login-page .container {
+  max-height: calc(100vh - 200px);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Responsive adjustments for login page only */
+@media (max-width: 768px) {
+  .login-page {
+    padding: 15px;
+    justify-content: flex-start;
+    padding-top: 5vh;
+  }
+
+  .login-page .container {
+    max-height: calc(100vh - 120px);
+  }
+
+  .login-page .form {
+    max-width: calc(100vw - 30px);
+    max-height: calc(100vh - 120px);
+  }
+}
+
+@media (max-width: 480px) {
+  .login-page {
+    padding: 10px;
+    padding-top: 3vh;
+  }
+
+  .login-page .container {
+    max-height: calc(100vh - 80px);
+  }
+}
+
+/* Keep all other pages scrollable */
+body:not(.login-active) {
+  overflow-y: auto !important;
+  height: auto !important;
+  max-height: none !important;
+}
+
+html:not(.login-active) {
+  overflow-y: auto !important;
+  height: auto !important;
+  max-height: none !important;
+}
+
+/* Ensure admin dashboard and other pages can scroll normally */
+.admin-dashboard,
+.task-page,
+.admin-employee-container {
+  overflow-y: auto !important;
+  height: auto !important;
+  max-height: none !important;
+}
