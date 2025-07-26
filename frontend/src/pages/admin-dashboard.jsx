@@ -1,13 +1,13 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { useNavigate, Outlet, useLocation } from "react-router-dom"
+import { useNavigate, useLocation } from "react-router-dom"
 import { useAuth } from "../context/context"
 import { useTask } from "../context/taskcontext"
 import axios from "axios"
 import "./admin-dashboard.css"
 import "./admin-section/admin-section-css/scrolling-fix.css"
-import "./admin-dashboard-fix.css" // ADD THIS LINE
+import "./admin-dashboard-fix.css"
 
 const Admindashboard = () => {
   const { user, logout, loading } = useAuth()
@@ -103,7 +103,6 @@ const Admindashboard = () => {
             </section>
           </>
         )}
-        <Outlet />
       </main>
     </div>
   )
