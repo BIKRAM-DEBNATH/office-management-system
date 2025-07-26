@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from "../../context/context";
 import { useTask } from "../../context/taskcontext";
 import axios from "axios";
+import "./admin-section-css/scrolling-fix.css";
+
 
 const TaskManager = () => {
   const navigate = useNavigate();
