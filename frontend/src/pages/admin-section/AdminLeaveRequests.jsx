@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import "./admin-section-css/adminleave.css";
 import axios from "axios";
 import { useAuth } from "../../context/context";
+import "./admin-section-css/scrolling-fix.css";
+
 
 const AdminLeaveRequests = () => {
   const [requests, setRequests] = useState([]);
