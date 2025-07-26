@@ -15,6 +15,51 @@ body {
   min-height: 100vh;
 }
 
+/* ===== SPECIFIC FIX FOR ADMIN DASHBOARD SCROLLING ===== */
+/* Fix the main dashboard container */
+.admin-dashboard {
+  display: flex !important;
+  min-height: 100vh !important;
+  height: auto !important; /* Allow natural height */
+  max-height: none !important; /* Remove height restrictions */
+  overflow-x: hidden !important;
+  overflow-y: auto !important; /* Allow vertical scrolling */
+}
+
+/* Fix the dashboard content area */
+.dashboard-content {
+  flex: 1 !important;
+  margin-left: 0 !important; /* Always start with no margin since sidebar is hidden */
+  padding: 30px 30px 30px calc(var(--toggle-size) + 50px) !important;
+  transition: all var(--transition-medium) !important;
+
+  /* CRITICAL FIXES FOR SCROLLING */
+  height: auto !important; /* Remove fixed height */
+  min-height: auto !important; /* Remove min-height restriction */
+  max-height: none !important; /* Remove max-height restriction */
+  overflow-x: hidden !important;
+  overflow-y: auto !important; /* Enable vertical scrolling */
+  position: relative !important;
+}
+
+.dashboard-content.expanded {
+  margin-left: 0 !important;
+  padding-left: calc(var(--toggle-size) + 50px) !important;
+
+  /* Same scrolling fixes for expanded state */
+  height: auto !important;
+  min-height: auto !important;
+  max-height: none !important;
+  overflow-y: auto !important;
+}
+
+/* Ensure the Outlet content can scroll */
+.dashboard-content > * {
+  height: auto !important;
+  max-height: none !important;
+  overflow-y: visible !important;
+}
+
 /* ===== CSS RESET & BASE STYLES ===== */
 * {
   margin: 0;
@@ -134,6 +179,20 @@ body {
   transform-origin: center;
 }
 
+/* Enhanced toggle button lines */
+.tog-l.active:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 6px);
+}
+
+.tog-l.active:nth-child(2) {
+  opacity: 0;
+  transform: scale(0);
+}
+
+.tog-l.active:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
 .sidebar-toggle:hover .tog-l:nth-child(1) {
   transform: rotate(45deg) translate(6px, 6px);
 }
@@ -147,7 +206,7 @@ body {
   transform: rotate(-45deg) translate(6px, -6px);
 }
 
-/* ===== SIDEBAR STYLES ===== */
+/* ===== ENHANCED SIDEBAR STYLES ===== */
 .sidebar {
   width: var(--sidebar-width);
   background: var(--bg-secondary);
@@ -161,25 +220,18 @@ body {
   transition: all var(--transition-medium);
   overflow-y: auto;
   overflow-x: hidden;
-  transform: translateX(0);
-  /* Ensure sidebar doesn't block main content scrolling */
+  transform: translateX(-100%); /* ✅ Start hidden */
+  will-change: transform;
 }
 
-.sidebar::-webkit-scrollbar {
-  width: 4px;
-}
-
-.sidebar::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.sidebar::-webkit-scrollbar-thumb {
-  background: var(--primary-gradient);
-  border-radius: 2px;
+.sidebar.open {
+  transform: translateX(0); /* ✅ Show when open */
+  animation: slideInLeft 0.3s ease-out;
 }
 
 .sidebar.hidden {
-  transform: translateX(-100%);
+  transform: translateX(-100%); /* ✅ Hide when closed */
+  animation: slideOutLeft 0.3s ease-out;
 }
 
 .sidebar::before {
@@ -265,6 +317,25 @@ body {
 
 .nav-links li:not(.logout):active {
   transform: translateX(2px);
+}
+
+/* Active navigation item styling */
+.nav-links li.active {
+  background: var(--primary-gradient);
+  color: white;
+  transform: translateX(5px);
+  box-shadow: var(--shadow-medium);
+}
+
+.nav-links li.active::before {
+  left: 0;
+}
+
+/* Enhanced hover effects for navigation */
+.nav-links li:not(.logout):not(.active):hover {
+  background: rgba(102, 126, 234, 0.1);
+  border-left: 3px solid var(--text-accent);
+  padding-left: 17px;
 }
 
 /* ===== LOGOUT BUTTON ===== */
@@ -780,6 +851,30 @@ body {
 
 /* Tablet Portrait & Mobile Landscape */
 @media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    z-index: 1002;
+  }
+
+  .sidebar-overlay {
+    display: block;
+  }
+
+  .dashboard-content {
+    margin-left: 0 !important;
+    padding: 20px 20px 20px calc(var(--toggle-size) + 35px) !important;
+    height: auto !important;
+    min-height: auto !important;
+    overflow-y: auto !important;
+  }
+
+  .dashboard-content.expanded {
+    padding-left: calc(var(--toggle-size) + 35px) !important;
+    height: auto !important;
+    min-height: auto !important;
+    overflow-y: auto !important;
+  }
+
   :root {
     --sidebar-width: 100%;
   }
@@ -1197,4 +1292,71 @@ main,
   overflow-y: auto !important;
   height: auto !important;
   max-height: none !important;
+}
+
+/* ===== SIDEBAR OVERLAY AND ANIMATIONS ===== */
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 999;
+  opacity: 0;
+  animation: overlayFadeIn 0.3s ease-out forwards;
+}
+
+@keyframes overlayFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOutLeft {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+/* Loading state improvements */
+.dashboard-content > p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+  font-size: 18px;
+  color: var(--text-secondary);
+}
+
+/* Debug: Add visible indicator at bottom of content */
+.dashboard-content::after {
+  content: "🔽 END OF CONTENT - SCROLLING WORKS! 🔽";
+  display: block;
+  width: 100%;
+  height: 100px;
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  line-height: 100px;
+  margin-top: 50px;
+  border-radius: 10px;
 }
