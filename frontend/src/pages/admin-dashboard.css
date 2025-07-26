@@ -71,24 +71,26 @@
 
 /* ===== SIDEBAR TOGGLE BUTTON ===== */
 .sidebar-toggle {
-  position: fixed;
-  top: 25px;
-  left: 25px;
+  position: absolute; /* fixed from 'abso' typo */
+  top: 10px; /* moved closer to top */
+  left: 10px; /* moved closer to left */
   z-index: 1001;
   background: var(--bg-glass);
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius-md);
-  padding: 12px;
+  padding: 8px; /* reduced padding */
   cursor: pointer;
   backdrop-filter: blur(20px);
   transition: all var(--transition-medium);
   box-shadow: var(--shadow-medium);
-  width: var(--toggle-size);
-  height: var(--toggle-size);
+  width: 32px; /* smaller width */
+  height: 32px; /* smaller height */
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
+
 
 .sidebar-toggle:hover {
   background: var(--bg-card);
