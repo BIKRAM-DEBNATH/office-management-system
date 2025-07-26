@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../context/context';
 import './admin-employees.css';
+import "./admin-section/admin-section-css/scrolling-fix.css";
+
 
 const AdminEmployees = () => {
   const { user, loading } = useAuth();
