@@ -13,7 +13,6 @@ body {
 
 /* ===== TASK MANAGER STYLES - PROFESSIONAL & RICH ===== */
 /* Enhanced luxury design with vertical layout */
-
 :root {
   /* Enhanced Color Palette - Luxury Professional Theme */
   --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -25,13 +24,13 @@ body {
   --luxury-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
   --gold-gradient: linear-gradient(135deg, #ffd700 0%, #ffb347 100%);
   --platinum-gradient: linear-gradient(135deg, #e5e5e5 0%, #f0f0f0 100%);
-
+  
   /* Status Gradients */
   --pending-gradient: linear-gradient(135deg, #ff9a56 0%, #ffad56 100%);
   --completed-gradient: linear-gradient(135deg, #56ab2f 0%, #a8e6cf 100%);
   --in-progress-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
   --overdue-gradient: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);
-
+  
   --bg-primary: #0a0a1a;
   --bg-secondary: #1a1a2e;
   --bg-tertiary: #16213e;
@@ -39,30 +38,30 @@ body {
   --bg-glass: rgba(255, 255, 255, 0.12);
   --bg-input: rgba(255, 255, 255, 0.1);
   --bg-luxury: rgba(102, 126, 234, 0.05);
-
+  
   --text-primary: #ffffff;
   --text-secondary: #b8b8d1;
   --text-muted: #8b8ba7;
   --text-accent: #667eea;
   --text-luxury: #f8f9ff;
-
+  
   --border-color: rgba(255, 255, 255, 0.15);
   --border-focus: rgba(102, 126, 234, 0.6);
   --border-luxury: rgba(102, 126, 234, 0.3);
-
+  
   --shadow-light: 0 4px 6px rgba(0, 0, 0, 0.15);
   --shadow-medium: 0 10px 25px rgba(0, 0, 0, 0.25);
   --shadow-heavy: 0 20px 40px rgba(0, 0, 0, 0.35);
   --shadow-luxury: 0 25px 50px rgba(0, 0, 0, 0.4);
   --shadow-glow: 0 0 30px rgba(102, 126, 234, 0.4);
   --shadow-gold: 0 0 25px rgba(255, 215, 0, 0.3);
-
+  
   --border-radius-sm: 10px;
   --border-radius-md: 15px;
   --border-radius-lg: 20px;
   --border-radius-xl: 25px;
   --border-radius-luxury: 30px;
-
+  
   --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-medium: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -77,7 +76,8 @@ body {
   font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   color: var(--text-luxury);
   position: relative;
-  /* Remove min-height: 100vh to allow natural content height */
+  border: none;
+  outline: none;
 }
 
 .task-page::before {
@@ -92,7 +92,6 @@ body {
     radial-gradient(circle at 40% 40%, rgba(240, 147, 251, 0.1) 0%, transparent 50%);
   pointer-events: none;
   z-index: -1;
-  /* Ensure it doesn't block scrolling */
 }
 
 /* ===== SCROLL INDICATOR ===== */
@@ -174,6 +173,7 @@ body {
   position: relative;
   overflow: hidden;
   box-shadow: var(--shadow-medium);
+  outline: none;
 }
 
 .back::before {
@@ -236,6 +236,7 @@ body {
   box-shadow: var(--shadow-luxury), inset 0 1px 0 rgba(255, 255, 255, 0.1);
   position: relative;
   overflow: hidden;
+  outline: none;
 }
 
 .task-controls::before {
@@ -263,11 +264,6 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-}
-
-/* Enhanced luxury pattern overlay */
-.task-controls::before {
-  background: var(--luxury-gradient);
 }
 
 /* ===== FORM GRID LAYOUT ===== */
@@ -311,6 +307,7 @@ body {
   transition: all var(--transition-luxury);
   position: relative;
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+  outline: none;
 }
 
 .task-controls input::placeholder {
@@ -361,6 +358,7 @@ body {
   text-transform: uppercase;
   letter-spacing: 2px;
   box-shadow: var(--shadow-medium);
+  outline: none;
 }
 
 .task-add::before {
@@ -410,7 +408,8 @@ body {
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   gap: 30px;
   padding: 20px 0;
-  /* Remove max-height and overflow restrictions to allow natural page scrolling */
+  border: none;
+  outline: none;
 }
 
 .review > p {
@@ -461,9 +460,9 @@ body {
   overflow: hidden;
   box-shadow: var(--shadow-medium), inset 0 1px 0 rgba(255, 255, 255, 0.1);
   animation: luxurySlideIn 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  /* Ensure natural height based on content */
   min-height: auto;
   height: auto;
+  outline: none;
 }
 
 .task-card::before {
@@ -659,35 +658,28 @@ body {
 }
 
 /* ===== RESPONSIVE DESIGN ===== */
-
 /* Large Desktop */
 @media (min-width: 1400px) {
   .task-page {
     padding: 60px;
   }
-
   .task-page h1 {
     font-size: 56px;
   }
-
   .task-controls {
     padding: 60px;
     grid-template-columns: 1fr 1fr 1fr;
   }
-
   .task-controls select {
     grid-column: 3 / 4;
   }
-
   .task-add {
     grid-column: 1 / 4;
   }
-
   .review {
     grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
     gap: 35px;
   }
-
   .task-card {
     padding: 40px;
   }
@@ -698,11 +690,9 @@ body {
   .task-page {
     padding: 50px;
   }
-
   .task-page h1 {
     font-size: 52px;
   }
-
   .task-controls {
     padding: 55px;
   }
@@ -713,26 +703,21 @@ body {
   .task-page {
     padding: 40px;
   }
-
   .task-page h1 {
     font-size: 44px;
   }
-
   .task-controls {
     padding: 45px;
     grid-template-columns: 1fr;
   }
-
   .task-controls input,
   .task-controls select,
   .task-add {
     grid-column: 1;
   }
-
   .review {
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   }
-
   .task-card {
     padding: 30px;
   }
@@ -743,20 +728,16 @@ body {
   .task-page {
     padding: 30px;
   }
-
   .task-page h1 {
     font-size: 36px;
   }
-
   .task-controls {
     padding: 35px;
     grid-template-columns: 1fr;
   }
-
   .review {
     grid-template-columns: 1fr;
   }
-
   .task-card {
     padding: 25px;
   }
@@ -767,66 +748,53 @@ body {
   .task-page {
     padding: 20px;
   }
-
   .task-page h1 {
     font-size: 28px;
     margin-bottom: 15px;
   }
-
   .task-page h1::before {
     display: none;
   }
-
   .back {
     padding: 12px 24px;
     font-size: 14px;
     margin-bottom: 25px;
   }
-
   .task-container {
     gap: 30px;
   }
-
   .task-controls {
     padding: 25px;
     grid-template-columns: 1fr;
     padding-top: 60px;
   }
-
   .task-controls::after {
     font-size: 16px;
     top: 20px;
     left: 25px;
   }
-
   .task-controls input,
   .task-controls select {
     padding: 16px 20px;
     font-size: 15px;
   }
-
   .task-add {
     padding: 16px 30px;
     font-size: 16px;
   }
-
   .review {
     grid-template-columns: 1fr;
     gap: 20px;
   }
-
   .task-card {
     padding: 25px;
   }
-
   .task-card h3 {
     font-size: 20px;
   }
-
   .task-card p {
     font-size: 14px;
   }
-
   .task-card p:first-of-type {
     font-size: 15px;
   }
@@ -837,45 +805,36 @@ body {
   .task-page {
     padding: 15px;
   }
-
   .task-page h1 {
     font-size: 24px;
   }
-
   .task-controls {
     padding: 20px;
     padding-top: 50px;
   }
-
   .task-controls::after {
     font-size: 14px;
     top: 15px;
     left: 20px;
   }
-
   .task-controls input,
   .task-controls select {
     padding: 14px 18px;
     font-size: 14px;
   }
-
   .task-add {
     padding: 14px 25px;
     font-size: 15px;
   }
-
   .task-card {
     padding: 20px;
   }
-
   .task-card h3 {
     font-size: 18px;
   }
-
   .task-card p {
     font-size: 13px;
   }
-
   .task-card p:first-of-type {
     font-size: 14px;
   }
@@ -886,21 +845,17 @@ body {
   .task-page {
     padding: 10px;
   }
-
   .task-page h1 {
     font-size: 22px;
   }
-
   .task-controls {
     padding: 18px;
     padding-top: 45px;
   }
-
   .task-controls input,
   .task-controls select {
     padding: 12px 16px;
   }
-
   .task-card {
     padding: 18px;
   }
@@ -940,7 +895,6 @@ body {
   .back {
     display: none;
   }
-
   .task-card {
     break-inside: avoid;
     box-shadow: none;
@@ -974,3 +928,19 @@ body {
   transform: translateY(-4px);
   box-shadow: var(--shadow-luxury), var(--shadow-glow);
 }
+
+/* ===== REMOVE ALL RED OUTLINES AND EFFECTS ===== */
+* {
+  outline: none !important;
+}
+
+*:focus {
+  outline: none !important;
+}
+
+/* Remove any potential red borders from browser debugging */
+* {
+  border: none !important;
+}
+
+/* Restore only the intended borders */
