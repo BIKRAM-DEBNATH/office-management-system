@@ -4,6 +4,8 @@ import React, { useEffect, useState } from "react";
 import { useAuth } from "../../context/context";
 import { useNavigate } from "react-router-dom";
 import "./admin-section-css/settings.css";
+import "./admin-section-css/scrolling-fix.css";
+
 
 const Settings = () => {
   const { user, loading } = useAuth();
