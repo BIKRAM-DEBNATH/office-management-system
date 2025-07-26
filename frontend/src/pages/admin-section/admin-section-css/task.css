@@ -944,3 +944,55 @@ body {
 }
 
 /* Restore only the intended borders */
+.task-page {
+  border: none;
+}
+
+.back {
+  border: 2px solid var(--border-luxury) !important;
+}
+
+.task-controls {
+  border: 2px solid var(--border-luxury) !important;
+}
+
+.task-controls input,
+.task-controls select {
+  border: 2px solid var(--border-color) !important;
+}
+
+.task-card {
+  border: 2px solid var(--border-color) !important;
+}
+
+.review > p {
+  border: 2px dashed var(--border-luxury) !important;
+}
+
+.task-card.pending {
+  border-left: 6px solid #ff9a56 !important;
+  border-top: 2px solid var(--border-color) !important;
+  border-right: 2px solid var(--border-color) !important;
+  border-bottom: 2px solid var(--border-color) !important;
+}
+
+.task-card.completed {
+  border-left: 6px solid #56ab2f !important;
+  border-top: 2px solid var(--border-color) !important;
+  border-right: 2px solid var(--border-color) !important;
+  border-bottom: 2px solid var(--border-color) !important;
+}
+
+.task-card.in-progress {
+  border-left: 6px solid #4facfe !important;
+  border-top: 2px solid var(--border-color) !important;
+  border-right: 2px solid var(--border-color) !important;
+  border-bottom: 2px solid var(--border-color) !important;
+}
+
+.task-card.overdue {
+  border-left: 6px solid #ff416c !important;
+  border-top: 2px solid var(--border-color) !important;
+  border-right: 2px solid var(--border-color) !important;
+  border-bottom: 2px solid var(--border-color) !important;
+}
