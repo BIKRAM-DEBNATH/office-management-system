@@ -76,7 +76,7 @@
   left: 10px; /* moved closer to left */
   z-index: 1001;
   background: var(--bg-glass);
-  border: 1px solid var(--border-color);
+  border: 0.5px solid var(--border-color);
   border-radius: var(--border-radius-md);
   padding: 8px; /* reduced padding */
   cursor: pointer;
