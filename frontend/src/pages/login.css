@@ -275,3 +275,6 @@ html, body {
 .success-message{
     color: green;
 }
+* {
+  outline: 1px solid red;
+}
