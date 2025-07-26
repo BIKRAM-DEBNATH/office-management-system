@@ -404,9 +404,10 @@
 .card p {
   font-size: 36px;
   font-weight: 700;
---text-primary: #0f172a;
+  color: #0f172a; 
   margin: 0;
 }
+
 
 /* ===== SPECIAL TASK CARD ===== */
 .task-1 {
