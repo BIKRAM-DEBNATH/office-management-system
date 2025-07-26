@@ -1,85 +1,90 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
-import { useNavigate, useLocation } from "react-router-dom"
-import { useAuth } from "../context/context"
-import { useTask } from "../context/taskcontext"
-import axios from "axios"
-import "./admin-dashboard.css"
-import "./admin-section/admin-section-css/scrolling-fix.css"
+import { useEffect, useState } from "react";
+import { useNavigate, useLocation, Outlet } from "react-router-dom";
+import { useAuth } from "../context/context";
+import { useTask } from "../context/taskcontext";
+import axios from "axios";
+import "./admin-dashboard.css";
+import "./admin-section/admin-section-css/scrolling-fix.css";
 
 const Admindashboard = () => {
-  const { user, logout, loading } = useAuth()
-  const navigate = useNavigate()
-  const location = useLocation()
-  const { tasks, fetchTasks, loading: taskLoading } = useTask()
-  const [employeeCount, setEmployeeCount] = useState(null)
-  const [sidebarOpen, setSidebarOpen] = useState(true)
+  const { user, logout, loading } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { tasks, fetchTasks, loading: taskLoading } = useTask();
+  const [employeeCount, setEmployeeCount] = useState(null);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
 
   const fetchEmployeeCount = async () => {
     try {
-      const token = localStorage.getItem("token")
-      const res = await axios.get("https://oms-api-production.up.railway.app/api/employees/count", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      setEmployeeCount(res.data.count)
+      const token = localStorage.getItem("token");
+      const res = await axios.get(
+        "https://oms-api-production.up.railway.app/api/employees/count",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setEmployeeCount(res.data.count);
     } catch (err) {
-      console.error("❌ Failed to fetch employee count:", err.message)
+      console.error("❌ Failed to fetch employee count:", err.message);
     }
-  }
+  };
 
   useEffect(() => {
     if (!loading) {
       if (!user || user.role !== "admin") {
-        navigate("/login")
+        navigate("/login");
       } else {
-        fetchEmployeeCount()
-        fetchTasks(true)
+        fetchEmployeeCount();
+        fetchTasks(true);
       }
     }
-  }, [user, loading])
+  }, [user, loading]);
 
-  if (loading || taskLoading) return <p>🔐 Checking access...</p>
+  if (loading || taskLoading) return <p>🔐 Checking access...</p>;
 
-  const pendingTasks = tasks?.filter((task) => task.status === "pending") || []
-  const completedTasks = tasks?.filter((task) => task.status === "completed") || []
+  const pendingTasks =
+    tasks?.filter((task) => task.status === "pending") || [];
+  const completedTasks =
+    tasks?.filter((task) => task.status === "completed") || [];
 
-  // Check if route is exactly /admin-dashboard
-  const isDashboard = location.pathname === "/admin-dashboard"
+  const isDashboard = location.pathname === "/admin-dashboard";
 
   return (
     <div className="admin-dashboard">
-      {isDashboard && (
-        <>
-          <button className="sidebar-toggle" onClick={() => setSidebarOpen(!sidebarOpen)}>
-            <div className="tog-c">
-              <div className="tog-l"></div>
-              <div className="tog-l"></div>
-              <div className="tog-l"></div>
-            </div>
-          </button>
+      {/* Sidebar */}
+      <>
+        <button
+          className="sidebar-toggle"
+          onClick={() => setSidebarOpen(!sidebarOpen)}
+        >
+          <div className="tog-c">
+            <div className="tog-l"></div>
+            <div className="tog-l"></div>
+            <div className="tog-l"></div>
+          </div>
+        </button>
 
-          <aside className={`sidebar ${sidebarOpen ? "" : "hidden"}`}>
-            <h2 className="logo">Admin Panel</h2>
-            <ul className="nav-links">
-              <li onClick={() => navigate("/admin-dashboard")}>Dashboard</li>
-              <li onClick={() => navigate("/admin-dashboard/employees")}>Employees</li>
-              <li onClick={() => navigate("/admin-dashboard/task")}>New Tasks</li>
-              <li onClick={() => navigate("/admin-dashboard/report")}>Reports</li>
-              <li onClick={() => navigate("/admin-dashboard/leave-requests")}>Leave</li>
-              <li onClick={() => navigate("/admin-dashboard/settings")}>Settings</li>
-              <li onClick={logout} className="logout">
-                Logout
-              </li>
-            </ul>
-          </aside>
-        </>
-      )}
+        <aside className={`sidebar ${sidebarOpen ? "" : "hidden"}`}>
+          <h2 className="logo">Admin Panel</h2>
+          <ul className="nav-links">
+            <li onClick={() => navigate("/admin-dashboard")}>Dashboard</li>
+            <li onClick={() => navigate("/admin-dashboard/employees")}>Employees</li>
+            <li onClick={() => navigate("/admin-dashboard/task")}>New Tasks</li>
+            <li onClick={() => navigate("/admin-dashboard/report")}>Reports</li>
+            <li onClick={() => navigate("/admin-dashboard/leave-requests")}>Leave</li>
+            <li onClick={() => navigate("/admin-dashboard/settings")}>Settings</li>
+            <li onClick={logout} className="logout">Logout</li>
+          </ul>
+        </aside>
+      </>
 
+      {/* Main Content */}
       <main
-        className={`dashboard-content ${isDashboard && sidebarOpen ? "" : "expanded"}`}
+        className={`dashboard-content ${sidebarOpen ? "" : "expanded"}`}
         style={{
           height: "auto",
           maxHeight: "none",
@@ -87,7 +92,7 @@ const Admindashboard = () => {
           minHeight: "auto",
         }}
       >
-        {isDashboard && (
+        {isDashboard ? (
           <>
             <header className="dashboard-header">
               <h1>Welcome, {user?.name || "Admin"}</h1>
@@ -108,10 +113,12 @@ const Admindashboard = () => {
               </div>
             </section>
           </>
+        ) : (
+          <Outlet /> // ✅ Sub-routes render here
         )}
       </main>
     </div>
-  )
-}
+  );
+};
 
-export default Admindashboard
+export default Admindashboard;
