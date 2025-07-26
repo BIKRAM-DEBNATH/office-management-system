@@ -8,9 +8,16 @@ const AdminEmployees = () => {
   const { user, loading } = useAuth();
   const navigate = useNavigate();
   const [employees, setEmployees] = useState([]);
-  const [formData, setFormData] = useState({ name: '', email: '', role: '' });
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    role: '',
+    password: ''
+  });
   const [editingId, setEditingId] = useState(null);
-  const [showForm, setShowForm] = useState(false); // form toggle
+  const [showForm, setShowForm] = useState(false);
+
+  const BASE_URL = 'https://oms-api-production.up.railway.app/api/employees';
 
   useEffect(() => {
     if (!loading && (!user || user.role !== 'admin')) {
@@ -23,7 +30,7 @@ const AdminEmployees = () => {
   const fetchEmployees = async () => {
     try {
       const token = localStorage.getItem('token');
-const res = await axios.get('https://oms-api-production.up.railway.app/api/employees', {
+      const res = await axios.get(BASE_URL, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setEmployees(res.data);
@@ -37,15 +44,15 @@ const res = await axios.get('https://oms-api-production.up.railway.app/api/emplo
     const token = localStorage.getItem('token');
     try {
       if (editingId) {
-        await axios.put(`http://localhost:5000/api/employees/${editingId}`, formData, {
+        await axios.put(`${BASE_URL}/${editingId}`, formData, {
           headers: { Authorization: `Bearer ${token}` },
         });
       } else {
-        await axios.post('http://localhost:5000/api/employees', formData, {
+        await axios.post(BASE_URL, formData, {
           headers: { Authorization: `Bearer ${token}` },
         });
       }
-      setFormData({ name: '', email: '', role: '' });
+      setFormData({ name: '', email: '', role: '', password: '' });
       setEditingId(null);
       fetchEmployees();
       setShowForm(false);
@@ -57,7 +64,7 @@ const res = await axios.get('https://oms-api-production.up.railway.app/api/emplo
   const handleDelete = async (id) => {
     const token = localStorage.getItem('token');
     try {
-      await axios.delete(`http://localhost:5000/api/employees/${id}`, {
+      await axios.delete(`${BASE_URL}/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       fetchEmployees();
@@ -67,7 +74,7 @@ const res = await axios.get('https://oms-api-production.up.railway.app/api/emplo
   };
 
   const handleEdit = (emp) => {
-    setFormData({ name: emp.name, email: emp.email, role: emp.role });
+    setFormData({ name: emp.name, email: emp.email, role: emp.role, password: '' });
     setEditingId(emp._id);
     setShowForm(true);
   };
@@ -99,9 +106,9 @@ const res = await axios.get('https://oms-api-production.up.railway.app/api/emplo
           <input
             type="password"
             placeholder="Password"
-            value={formData.password || ''}
+            value={formData.password}
             onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-            required={!editingId} // Require password only when adding
+            required={!editingId}
           />
           <select
             value={formData.role}
@@ -114,7 +121,6 @@ const res = await axios.get('https://oms-api-production.up.railway.app/api/emplo
           </select>
           <button type="submit">{editingId ? 'Update' : 'Add'} Employee</button>
         </form>
-
       )}
 
       <ul className="employee-list">
