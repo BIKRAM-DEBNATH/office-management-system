@@ -1,0 +1,214 @@
+/* ===== COMPREHENSIVE SCROLLING FIX ===== */
+/* Add this CSS file and import it AFTER all other CSS files */
+
+/* Force scrolling on all essential elements */
+html {
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  height: auto !important;
+  max-height: none !important;
+  scroll-behavior: smooth !important;
+}
+
+body {
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  height: auto !important;
+  max-height: none !important;
+  min-height: 100vh !important;
+}
+
+/* React root and main containers */
+#root,
+.App,
+.admin-dashboard {
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  height: auto !important;
+  max-height: none !important;
+  min-height: 100vh !important;
+}
+
+/* Dashboard content area */
+.dashboard-content {
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  height: auto !important;
+  max-height: none !important;
+  min-height: calc(100vh - 60px) !important;
+}
+
+/* Task page specific fixes */
+.task-page {
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  height: auto !important;
+  max-height: none !important;
+  min-height: 100vh !important;
+}
+
+.task-container {
+  overflow-y: visible !important;
+  overflow-x: hidden !important;
+  height: auto !important;
+  max-height: none !important;
+}
+
+.review {
+  overflow-y: visible !important;
+  overflow-x: hidden !important;
+  height: auto !important;
+  max-height: none !important;
+}
+
+/* Employee page fixes */
+.admin-employee-container {
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  height: auto !important;
+  max-height: none !important;
+  min-height: 100vh !important;
+}
+
+/* Ensure all main content areas can scroll */
+main,
+section,
+article,
+.content,
+.main-content {
+  overflow-y: auto !important;
+  height: auto !important;
+  max-height: none !important;
+}
+
+/* Fix any flex containers that might be restricting height */
+.admin-dashboard {
+  display: flex !important;
+  flex-direction: row !important;
+  min-height: 100vh !important;
+  height: auto !important;
+  max-height: none !important;
+}
+
+.dashboard-content {
+  flex: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  height: auto !important;
+  max-height: none !important;
+}
+
+/* Remove any position fixed that might interfere */
+.task-page,
+.admin-employee-container {
+  position: relative !important;
+}
+
+/* Ensure sidebar doesn't interfere with main content scrolling */
+.sidebar {
+  position: fixed !important;
+  height: 100vh !important;
+  overflow-y: auto !important;
+  z-index: 1000 !important;
+}
+
+/* Make sure content has proper margins when sidebar is present */
+.dashboard-content {
+  margin-left: var(--sidebar-width, 280px) !important;
+  padding: 30px !important;
+  width: calc(100% - var(--sidebar-width, 280px)) !important;
+}
+
+.dashboard-content.expanded {
+  margin-left: 0 !important;
+  width: 100% !important;
+  padding-left: calc(var(--toggle-size, 44px) + 50px) !important;
+}
+
+/* Mobile responsive fixes */
+@media (max-width: 768px) {
+  .dashboard-content {
+    margin-left: 0 !important;
+    width: 100% !important;
+    padding: 20px !important;
+    padding-left: calc(var(--toggle-size, 44px) + 35px) !important;
+  }
+
+  .dashboard-content.expanded {
+    padding-left: calc(var(--toggle-size, 44px) + 35px) !important;
+  }
+}
+
+/* Prevent any transform or position issues */
+.task-page *,
+.admin-employee-container *,
+.dashboard-content * {
+  transform: none !important;
+}
+
+/* Reset any problematic positioning */
+.task-page,
+.admin-employee-container {
+  position: static !important;
+  transform: none !important;
+}
+
+/* Ensure proper document flow */
+.task-page,
+.admin-employee-container,
+.dashboard-content {
+  display: block !important;
+  position: relative !important;
+  overflow-y: auto !important;
+  height: auto !important;
+  max-height: none !important;
+}
+
+/* Force scroll on task container */
+.task-container {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 50px !important;
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+/* Ensure review section is scrollable */
+.review {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)) !important;
+  gap: 30px !important;
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+  padding: 20px 0 !important;
+}
+
+/* Fix any viewport units that might cause issues */
+.task-page,
+.admin-employee-container {
+  min-height: auto !important;
+  height: auto !important;
+}
+
+/* Ensure body can accommodate all content */
+body {
+  padding-bottom: 50px !important;
+}
+
+/* Debug styles - remove after testing */
+.task-page {
+  border: 2px solid red !important;
+  background: rgba(255, 0, 0, 0.1) !important;
+}
+
+.review {
+  border: 2px solid blue !important;
+  background: rgba(0, 0, 255, 0.1) !important;
+}
+
+.task-card {
+  border: 2px solid green !important;
+  margin-bottom: 20px !important;
+}
