@@ -90,8 +90,8 @@ body {
 /* ===== SIDEBAR TOGGLE BUTTON ===== */
 .sidebar-toggle {
   position: fixed;
-  top: 25px;
-  left: 25px;
+  top: 15px;
+  left: 18px;
   z-index: 1001;
   background: var(--bg-glass);
   border: 1px solid var(--border-color);
