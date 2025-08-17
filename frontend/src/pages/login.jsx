@@ -48,7 +48,7 @@ const Login = () => {
     }
 
     try {
-      const res = await axios.post("https://oms-api-production.up.railway.app/api/auth/login", {
+      const res = await axios.post("https://oms-api-production-b8aa.up.railway.app/api/auth/login", {
         email,
         password,
       })
