@@ -16,8 +16,8 @@ export const TaskProvider = ({ children }) => {
         return;
       }
 const endpoint = isAdmin
- ? "https://oms-api-production-b8aa.up.railway.app/api/tasks"           // all tasks for admin
-  : "https://oms-api-production-b8aa.up.railway.app/api/tasks/employee"; // only employee's tasks
+ ? "https://oms-api-l5st.onrender.com/api/tasks"           // all tasks for admin
+  : "https://oms-api-l5st.onrender.com/api/tasks/employee"; // only employee's tasks
 
       const res = await axios.get(endpoint, {
         headers: {

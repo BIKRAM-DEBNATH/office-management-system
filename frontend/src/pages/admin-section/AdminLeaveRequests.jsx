@@ -12,7 +12,7 @@ const AdminLeaveRequests = () => {
   const fetchRequests = async () => {
     try {
       const token = localStorage.getItem("token");
-const res = await axios.get("https://oms-api-production-b8aa.up.railway.app/api/leaves", {
+const res = await axios.get("https://oms-api-l5st.onrender.com/api/leaves", {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (res.data.success) {

@@ -82,7 +82,7 @@ const Settings = () => {
     try {
       const token = localStorage.getItem("token")
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL || "https://oms-api-production-b8aa.up.railway.app"}/api/admin/settings`,
+        `${process.env.REACT_APP_API_URL || "https://oms-api-l5st.onrender.com"}/api/admin/settings`,
         {
           headers: { Authorization: `Bearer ${token}` },
         },
@@ -113,7 +113,7 @@ const Settings = () => {
     try {
       const token = localStorage.getItem("token")
       const response = await axios.put(
-        `${process.env.REACT_APP_API_URL || "https://oms-api-production-b8aa.up.railway.app"}/api/admin/settings`,
+        `${process.env.REACT_APP_API_URL || "https://oms-api-l5st.onrender.com"}/api/admin/settings`,
         { settings },
         {
           headers: { Authorization: `Bearer ${token}` },

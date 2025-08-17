@@ -29,7 +29,7 @@ const TaskManager = () => {
   const fetchEmployees = async () => {
     try {
       const token = localStorage.getItem("token");
-const res = await axios.get("https://oms-api-production-b8aa.up.railway.app/api/employees", {
+const res = await axios.get("https://oms-api-l5st.onrender.com/api/employees", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setEmployees(res.data);
@@ -41,7 +41,7 @@ const res = await axios.get("https://oms-api-production-b8aa.up.railway.app/api/
   const handleAddTask = async () => {
     try {
       const token = localStorage.getItem("token");
-const res = await axios.get("https://oms-api-production-b8aa.up.railway.app/api/tasks", {
+const res = await axios.get("https://oms-api-l5st.onrender.com/api/tasks", {
         title,
         description,
         assignedTo,
