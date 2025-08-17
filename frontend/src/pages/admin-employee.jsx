@@ -19,7 +19,7 @@ const AdminEmployees = () => {
   const [editingId, setEditingId] = useState(null);
   const [showForm, setShowForm] = useState(false);
 
-  const BASE_URL = 'https://oms-api-production.up.railway.app/api/employees';
+  const BASE_URL = 'https://oms-api-production-b8aa.up.railway.app/api/employees';
 
   useEffect(() => {
     if (!loading && (!user || user.role !== 'admin')) {
