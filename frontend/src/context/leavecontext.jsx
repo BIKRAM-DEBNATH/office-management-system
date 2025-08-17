@@ -4,7 +4,7 @@ import axios from "axios";
 const LeaveContext = createContext();
 
 // ✅ Central API base URL
-const API = "https://oms-api-production.up.railway.app";
+const API = "https://oms-api-production-b8aa.up.railway.app";
 
 export const LeaveProvider = ({ children }) => {
   const [leaves, setLeaves] = useState([]);
