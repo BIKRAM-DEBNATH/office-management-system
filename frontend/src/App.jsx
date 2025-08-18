@@ -17,6 +17,8 @@ import AdminEmployees from "./pages/admin-employee.jsx";
 import Dashboard from "./pages/Employeedashboard.jsx";
 import Timeline from "./pages/employee-section/timeline.jsx";
 import ApplicationToAdmin from "./pages/employee-section/application.jsx";
+import SubmitWork from "./pages/employee-section/submit.jsx";
+import CompanyNews from "./pages/employee-section/companynews.jsx";
 
 const App = () => {
   return (
@@ -43,6 +45,8 @@ const App = () => {
       <Route path="/employee-dashboard" element={<Dashboard />} />
       <Route path="/employee-dashboard/timeline" element={<Timeline />} />
       <Route path="/employee-dashboard/application" element={<ApplicationToAdmin />} />
+      <Route path="/employee-dashboard/submit-work" element={<SubmitWork />} />
+      <Route path="/employee-dashboard/company-news" element={<CompanyNews />} />
     </Routes>
   );
 };
