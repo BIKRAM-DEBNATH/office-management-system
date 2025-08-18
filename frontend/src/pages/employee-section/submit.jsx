@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./SubmitWork.css"; // <-- CSS file
+import "./employee-section-css/submit.css"; // <-- CSS file
 
 export default function SubmitWork() {
   const [work, setWork] = useState({
