@@ -19,7 +19,7 @@ const AdminEmployees = () => {
   const [editingId, setEditingId] = useState(null);
   const [showForm, setShowForm] = useState(false);
 
-  const BASE_URL = 'https://oms-api-l5st.onrender.com/api/employees';
+  const BASE_URL = 'https://oms-api-inky.vercel.app/api/employees';
 
   useEffect(() => {
     if (!loading && (!user || user.role !== 'admin')) {

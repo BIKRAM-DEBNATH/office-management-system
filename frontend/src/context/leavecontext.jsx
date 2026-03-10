@@ -4,7 +4,7 @@ import axios from "axios";
 const LeaveContext = createContext();
 
 // ✅ Central API base URL
-const API = "https://oms-api-l5st.onrender.com";
+const API = "https://oms-api-inky.vercel.app";
 
 export const LeaveProvider = ({ children }) => {
   const [leaves, setLeaves] = useState([]);

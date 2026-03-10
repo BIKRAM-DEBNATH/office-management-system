@@ -48,7 +48,7 @@ const Login = () => {
     }
 
     try {
-      const res = await axios.post("https://oms-api-l5st.onrender.com/api/auth/login", {
+      const res = await axios.post("https://oms-api-inky.vercel.app/api/auth/login", {
         email,
         password,
       })
